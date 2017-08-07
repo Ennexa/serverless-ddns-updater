@@ -1,0 +1,20 @@
+{
+    "auth_backends": {
+        "predefined": {
+            "users": {
+                "admin": "$2a$10$iqJSHD.BGr0E2IxQwYgJmeP3NvhPrXAeLSaGCj6IR/XU5QtjVu5Tm"
+            }
+        }
+    },
+    "update_endpoint": "ddns-update.example.com",
+    "hosts": {
+        "ddns1.example.com": {
+            "zoneId": "<optional>",
+            "ttl": 60,
+            "type": "A"
+        },
+        "ddns1.example.com": {
+            "ttl": 60
+        }
+    }
+}
