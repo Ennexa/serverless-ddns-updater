@@ -1,0 +1,94 @@
+#!/bin/bash
+
+DDNS_USERNAME=${DDNS_USERNAME:-admin}
+DDNS_PASSWORD=${DDNS_PASSWORD:-secret}
+DDNS_SERVER=${DDNS_PASSWORD:-}
+DDNS_SECURE=${DDNS_PASSWORD:-}
+
+HOSTNAME=
+PROTO=http
+COMMAND=
+
+usage() {
+
+    cat <<"EOT"
+$0 -h server_hostname [-u username] [-p password] [-s] command dynamic_hostname
+    commands:
+        get         - Display current dynamic ip (require bind-tools)
+        ip          - Get current external ip address
+        set         - Update dynamic ip
+
+    -h / --host     - DDNS Updater server hostname
+    -u / --username - Username
+    -p / --password - Password
+    -s / --secure   - Use HTTPS
+
+EOT
+}
+
+error() {
+    echo "ERROR: $1"
+    echo ""
+    usage
+    exit 1
+}
+
+for file in /etc/ddns-update /usr/local/etc/ddns-update ~/.ddns-update-rc; do
+    if [ -e $file ]; then
+        . $file
+    fi
+done
+
+while [ $# -gt 0 ]; do 
+
+    if [ "$1" == "--secure" ] || [ "$1" == "-s" ]; then
+        DDNS_SECURE=1
+        shift
+    elif [ "$1" == "--host" ] || [ "$1" == "-h" ]; then
+        DDNS_SERVER=$2
+        shift 2
+    elif [ "$1" == "--username" ] || [ "$1" == "-u" ]; then
+        DDNS_USERNAME=$2
+        shift 2
+    elif [ "$1" == "--password" ] || [ "$1" == "-p" ]; then
+        DDNS_PASSWORD=$2
+        shift 2
+    elif [ "$1" == "--help" ]; then
+        usage
+        exit
+    elif [[ ${1:0:1} != "-" ]]; then
+        if [ ! -z "$COMMAND" ]; then
+            HOSTNAME=$1
+        elif [ "$1" == "get" ] || [ "$1" == "ip" ] || [ "$1" == "set" ]; then
+            COMMAND=$1
+        else
+            error "Unknown command '$1'"
+        fi
+        shift
+    else
+        error "Unknown flag '$1'"
+    fi
+done
+
+if [ "$COMMAND" != "ip" ] && [ -z "$HOSTNAME" ]; then
+    error "Host name cannot be empty"
+fi
+
+if [ "$COMMAND" != "get" ] && [ -z "$DDNS_SERVER" ]; then
+    usage
+    error "DDNS server hostname cannot be empty"
+fi
+
+if [ ! -z "$DDNS_SECURE" ]; then
+    PROTO=https
+fi
+
+if [ $COMMAND == "get" ]; then
+    dig A "$HOSTNAME" +short
+elif [ $COMMAND == "ip" ]; then
+    curl -s "$PROTO://$DDNS_SERVER/"
+    echo ""
+elif [ $COMMAND == "set" ]; then
+    curl -s "$PROTO://$DDNS_USERNAME:$DDNS_PASSWORD@$DDNS_SERVER/update?hostname=$HOSTNAME"
+    echo ""
+fi
