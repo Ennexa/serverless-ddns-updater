@@ -7,12 +7,10 @@
     "bcryptjs": "^2.4.3"
   },
   "devDependencies": {
-    "serverless": "^1.19.0",
-    "serverless-domain-manager": "^1.1.9"
+    "serverless": "1.68.0",
+    "serverless-domain-manager": "3.3.2"
   },
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
-  },
-  "author": "",
-  "license": "ISC"
+  }
 }
