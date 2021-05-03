@@ -56,6 +56,6 @@ You may also use the `ddns-update` client included with this project. The client
 - **Configuration file**
   
   You man also create a persistent configuration by saving the above configuration variables to any of the following locations
-  - ~/.ddns-update-rc
-  - /usr/local/etc/ddns-update
-  - /etc/ddns-update
+  - `~/.ddns-update-rc`
+  - `/usr/local/etc/ddns-update`
+  - `/etc/ddns-update`
