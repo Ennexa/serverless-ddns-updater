@@ -4,7 +4,8 @@
   "description": "A serverless DDNS service using AWS Lambda",
   "main": "index.js",
   "dependencies": {
-    "bcryptjs": "^2.4.3"
+    "bcryptjs": "^2.4.3",
+    "cloudflare": "^2.7.0"
   },
   "devDependencies": {
     "@babel/core": "^7.14.0",
@@ -12,6 +13,7 @@
     "@babel/preset-typescript": "^7.13.0",
     "@types/aws-lambda": "^8.10.76",
     "@types/bcryptjs": "^2.4.2",
+    "@types/cloudflare": "^2.7.2",
     "@typescript-eslint/eslint-plugin": "^4.22.0",
     "@typescript-eslint/parser": "^4.22.0",
     "babel-eslint": "^10.1.0",

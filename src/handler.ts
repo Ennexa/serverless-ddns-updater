@@ -33,7 +33,7 @@ async function update(event: APIGatewayEvent) {
     }
 
     const hostConfig: IHostConfig = config.hosts[hostname];
-    const providerConfig = config.providers[hostConfig.provider];
+    const providerConfig = config.dns_providers[hostConfig.dns_provider || 'route53'];
     const updater = new DdnsUpdater(hostname, hostConfig, providerConfig);
 
     const currentIp: string|null = await updater.get(hostname);

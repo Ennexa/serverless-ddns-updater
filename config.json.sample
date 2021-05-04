@@ -6,14 +6,31 @@
             }
         }
     },
+    "dns_providers": {
+      "cloudflare-1": {
+        "dns_provider": "cloudflare",
+        "token": "CLOUDFLARE AUTH TOKEN"
+      },
+      "cloudflare-2": {
+        "dns_provider": "cloudflare",
+        "token": "CLOUDFLARE AUTH TOKEN"
+      }
+    },
     "update_endpoint": "ddns-update.example.com",
     "hosts": {
         "ddns1.example.com": {
+            "dns_provider_id": "cloudflare-1",
             "zoneId": "<optional>",
             "ttl": 60,
             "type": "A"
         },
-        "ddns1.example.com": {
+        "ddns1.example.org": {
+            "dns_provider_id": "cloudflare-2",
+            "zoneId": "<optional>",
+            "ttl": 60,
+            "type": "A"
+        },
+        "ddns1.example.net": {
             "ttl": 60
         }
     }
