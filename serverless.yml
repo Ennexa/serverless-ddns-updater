@@ -3,7 +3,7 @@ plugins:
   - serverless-domain-manager
 provider:
   name: aws
-  runtime: nodejs12.x
+  runtime: nodejs14.x
   region: us-east-1
   memorySize: 128
   timeout: 3
@@ -35,25 +35,23 @@ custom:
 
 package:
  patterns:
-    - handler.js
-    - auth.js
-    - ddns-updater.js
+    - 'src/**'
 
 functions:
   index:
     timeout: 10
-    handler: handler.index
+    handler: src/handler.index
     events:
       - http:
           path: "/"
           method: any
   update:
     timeout: 10
-    handler: handler.update
+    handler: src/handler.update
     events:
       - http:
           path: update
           method: any
           authorizer: auth
   auth:
-    handler: auth.auth
+    handler: src/auth.auth

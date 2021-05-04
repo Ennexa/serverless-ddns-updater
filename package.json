@@ -4,13 +4,25 @@
   "description": "A serverless DDNS service using AWS Lambda",
   "main": "index.js",
   "dependencies": {
-    "bcryptjs": "^2.4.3"
+    "bcryptjs": "^2.4.3",
+    "cloudflare": "^2.7.0"
   },
   "devDependencies": {
+    "@types/aws-lambda": "^8.10.76",
+    "@types/bcryptjs": "^2.4.2",
+    "@typescript-eslint/eslint-plugin": "^4.22.0",
+    "@typescript-eslint/parser": "^4.22.0",
+    "babel-eslint": "^10.1.0",
+    "eslint": "^7.25.0",
     "serverless": "^2.29.0",
-    "serverless-domain-manager": "^5.1.0"
+    "serverless-domain-manager": "^5.1.0",
+    "typescript": "^4.2.4"
+  },
+  "engines": {
+    "node": ">=14"
   },
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "build": "tsc --project ./tsconfig.json",
+    "lint": "eslint . --ext .ts"
   }
 }
