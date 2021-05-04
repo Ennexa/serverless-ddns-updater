@@ -1,6 +1,6 @@
 'use strict';
 
-import Route53 from './providers/route53.js';
+import Route53 from './providers/route53';
 import { IHostConfig} from './config';
 
 class DdnsUpdater {

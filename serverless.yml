@@ -1,6 +1,7 @@
 service: ddns-updater
 plugins:
   - serverless-domain-manager
+  - serverless-webpack
 provider:
   name: aws
   runtime: nodejs14.x
@@ -32,10 +33,13 @@ custom:
       domainName: ${self:custom.domain}
       stage: ${self:custom.stage}
       createRoute53Record: true
-
+  webpack:
+    webpackConfig: 'webpack.config.js'
+    includeModules:
+      forceExclude:
+        - aws-sdk
 package:
- patterns:
-    - 'src/**'
+  individually: true
 
 functions:
   index:

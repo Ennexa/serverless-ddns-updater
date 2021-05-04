@@ -1,7 +1,7 @@
 'use strict';
 
-import DdnsUpdater from './ddns-updater.js';
-import { IConfig, IHostConfig, Loader as ConfigLoader } from './config.js';
+import DdnsUpdater from './ddns-updater';
+import { IConfig, IHostConfig, Loader as ConfigLoader } from './config';
 import { APIGatewayEvent, Callback, Context } from 'aws-lambda';
 
 function createResponse(statusCode: number, body: string) {

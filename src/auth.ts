@@ -1,7 +1,7 @@
 'use strict';
 
 import bcrypt from 'bcryptjs';
-import { IConfig, Loader as ConfigLoader } from './config.js';
+import { IConfig, Loader as ConfigLoader } from './config';
 import { Callback, Context, APIGatewayTokenAuthorizerEvent } from 'aws-lambda';
 
 async function validate(username: string, password: string) {
